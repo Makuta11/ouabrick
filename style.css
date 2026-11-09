@@ -10,3 +10,5 @@ p, li { color: var(--fg); }
 a { color: var(--accent); }
 nav { margin-top: 48px; padding-top: 16px; border-top: 1px solid var(--muted); font-size: 0.95rem; }
 nav a { margin-right: 16px; }
+ul.models { padding-left: 0; list-style: none; }
+ul.models li { margin: 0 0 18px; }

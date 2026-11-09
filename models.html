@@ -1,0 +1,397 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Models and designers · Once Upon a Brick</title>
+<meta name="description" content="Every community brick design behind our assembly animations, with a link to build it yourself.">
+<link rel="stylesheet" href="style.css">
+<style>
+:root{--bg:#fbf7ef;--fg:#2b2622;--muted:#6f655c;--accent:#c8452f;--card:#fffdf8;--line:#e7dfd2;--chip:#f3ebdd;--shadow:0 1px 2px rgba(43,38,34,.06),0 8px 24px rgba(43,38,34,.08)}
+@media (prefers-color-scheme:dark){:root{--bg:#1d1a17;--fg:#f1ebe2;--muted:#b3a89c;--accent:#f07a5f;--card:#26221e;--line:#3a342e;--chip:#332d27;--shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.35)}}
+main.wide{max-width:1120px}
+.kicker{display:inline-flex;align-items:center;gap:8px;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);text-decoration:none;margin-bottom:10px}.studs{display:inline-grid;grid-template-columns:repeat(2,7px);gap:3px;padding:4px;border-radius:4px;background:var(--accent)}.studs i{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.55)}.hero h1{font-size:clamp(2rem,5vw,3rem);margin:0 0 6px}.stats{color:var(--muted);font-size:.9rem;margin-top:10px}
+.hero p{max-width:640px;margin:0 0 6px}
+.bar{position:sticky;top:0;z-index:2;display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:24px 0 18px;padding:10px 0;background:var(--bg);border-bottom:1px solid var(--line)}
+.bar input{flex:1 1 240px;min-width:0;font:inherit;font-size:1rem;padding:10px 14px;border:1px solid var(--line);border-radius:999px;background:var(--card);color:var(--fg)}
+.bar input:focus{outline:2px solid var(--accent);outline-offset:1px}
+.count{color:var(--muted);font-size:.9rem;white-space:nowrap}
+.toggle{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden}
+.toggle button{font:inherit;font-size:.9rem;padding:8px 14px;border:0;background:var(--card);color:var(--fg);cursor:pointer}
+.toggle button[aria-pressed=true]{background:var(--accent);color:#fff}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(190px,100%),1fr));gap:18px;list-style:none;padding:0;margin:0}
+.card{min-width:0;overflow-wrap:anywhere;background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column;transition:transform .15s ease}
+.card:hover{transform:translateY(-3px)}
+.shot{position:relative;display:block;aspect-ratio:9/16;background:var(--chip)}
+.shot{overflow:hidden}.shot img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .35s ease}.card:hover .shot img{transform:scale(1.04)}
+.shot .ph{position:absolute;inset:0;display:grid;place-items:center;font-size:3rem;color:var(--muted)}
+.play{position:absolute;right:10px;bottom:10px;width:38px;height:38px;border-radius:50%;background:rgba(0,0,0,.55);display:grid;place-items:center}
+.play:after{content:"";margin-left:3px;border-left:13px solid #fff;border-top:8px solid transparent;border-bottom:8px solid transparent}
+.info{padding:12px 14px 14px;display:flex;flex-direction:column;gap:4px;flex:1}
+.info h2{font-size:1.05rem;margin:0;line-height:1.3}
+.chip{align-self:flex-start;font:inherit;font-size:.75rem;padding:2px 9px;border:0;border-radius:999px;background:var(--chip);color:var(--muted);cursor:pointer}.chip:hover{color:var(--accent)}
+.by{font-size:.9rem;color:var(--muted)}
+.by a{color:var(--fg)}
+.acts{margin-top:auto;padding-top:10px;display:grid;grid-template-columns:1fr auto;gap:8px}
+.btn{font-size:.85rem;text-decoration:none;text-align:center;white-space:nowrap;padding:7px 12px;border-radius:999px;border:1px solid var(--line);color:var(--fg)}.btn:hover{border-color:var(--accent)}.btn.main:hover{filter:brightness(1.08)}.moc{font-size:.78rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.btn.main{background:var(--accent);border-color:var(--accent);color:#fff}
+.social{font-size:.8rem}
+.list .grid{grid-template-columns:1fr;gap:10px}
+.list .card{flex-direction:row;align-items:center;border-radius:12px}
+.list .card:hover{transform:none}
+.list .shot{width:64px;flex:0 0 64px;margin:8px 0 8px 8px;border-radius:8px;overflow:hidden}
+.list .play{display:none}
+.list .info{flex-direction:row;flex-wrap:wrap;align-items:center;gap:6px 12px;padding:10px 14px}
+.list .info h2{flex:1 1 160px}
+.list .acts{margin:0 0 0 auto;padding:0}
+.empty{color:var(--muted);padding:24px 0}
+@media (max-width:480px){.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.info{padding:10px}.info h2{font-size:.98rem}.btn{padding:6px 8px;font-size:.8rem}.bar{gap:8px}.count{display:none}}
+</style>
+</head>
+<body>
+<main class="wide">
+  <header class="hero">
+    <a class="kicker" href="index.html"><span class="studs" aria-hidden="true"><i></i><i></i><i></i><i></i></span>Once Upon a Brick</a>
+    <h1>Build it yourself</h1>
+    <p>Every animation here is built from a design by a fan builder (a MOC). Find the one you just watched, then open
+    its parts list and instructions on Rebrickable, and give its designer some love.</p>
+    <p class="stats">30 models by 24 designers</p>
+  </header>
+
+  <div class="bar" role="search">
+    <input id="q" type="search" placeholder="Search a character, a show or a designer" aria-label="Search the models" autocomplete="off">
+    <span class="count" id="n">30 models</span>
+    <span class="toggle" role="group" aria-label="View"><button type="button" data-m="gallery" aria-pressed="true">Gallery</button><button type="button" data-m="list" aria-pressed="false">List</button></span>
+  </div>
+
+  <div id="models">
+    <ul class="grid">
+<li class="card" data-s="stitch lilo &amp; stitch the brick guy kai moc-178811 178811 ">
+  <a class="shot" href="https://www.youtube.com/shorts/qhSKMnnlk00" aria-label="Watch Stitch"><img src="thumbs/stitch.jpg" alt="Stitch brick model" loading="lazy" width="360" height="640"><span class="play"></span></a>
+  <div class="info">
+    <h2>Stitch</h2>
+    <button type="button" class="chip" data-f="Lilo &amp; Stitch" title="Show all Lilo &amp; Stitch">Lilo &amp; Stitch</button>
+    <span class="by">Design by <strong>The Brick Guy Kai</strong></span>
+    <span class="moc">MOC-178811</span>
+    <div class="acts"><a class="btn main" href="https://rebrickable.com/mocs/MOC-178811/">Build it</a><a class="btn" href="https://www.youtube.com/shorts/qhSKMnnlk00">▶ Watch</a></div>
+  </div>
+</li>
+<li class="card" data-s="bulbasaur pokémon amybricks moc-185126 185126 ">
+  <a class="shot" href="https://www.youtube.com/shorts/8w4NGWa5ImM" aria-label="Watch Bulbasaur"><img src="thumbs/bulbasaur-amybricks.jpg" alt="Bulbasaur brick model" loading="lazy" width="360" height="640"><span class="play"></span></a>
+  <div class="info">
+    <h2>Bulbasaur</h2>
+    <button type="button" class="chip" data-f="Pokémon" title="Show all Pokémon">Pokémon</button>
+    <span class="by">Design by <strong>AmyBricks</strong></span>
+    <span class="moc">MOC-185126</span>
+    <div class="acts"><a class="btn main" href="https://rebrickable.com/mocs/MOC-185126/">Build it</a><a class="btn" href="https://www.youtube.com/shorts/8w4NGWa5ImM">▶ Watch</a></div>
+  </div>
+</li>
+<li class="card" data-s="hei hei moana capn_sparklpantz moc-270167 270167 ">
+  <a class="shot" href="https://www.youtube.com/shorts/mIBXfJYhwWc" aria-label="Watch Hei Hei"><img src="thumbs/hei-hei.jpg" alt="Hei Hei brick model" loading="lazy" width="360" height="640"><span class="play"></span></a>
+  <div class="info">
+    <h2>Hei Hei</h2>
+    <button type="button" class="chip" data-f="Moana" title="Show all Moana">Moana</button>
+    <span class="by">Design by <strong>capn_sparklpantz</strong></span>
+    <span class="moc">MOC-270167</span>
+    <div class="acts"><a class="btn main" href="https://rebrickable.com/mocs/MOC-270167/">Build it</a><a class="btn" href="https://www.youtube.com/shorts/mIBXfJYhwWc">▶ Watch</a></div>
+  </div>
+</li>
+<li class="card" data-s="turtwig pokémon tobiasz250 moc-169689 169689 ">
+  <a class="shot" href="https://www.youtube.com/shorts/t8GJI0aVfNM" aria-label="Watch Turtwig"><img src="thumbs/turtwig.jpg" alt="Turtwig brick model" loading="lazy" width="360" height="640"><span class="play"></span></a>
+  <div class="info">
+    <h2>Turtwig</h2>
+    <button type="button" class="chip" data-f="Pokémon" title="Show all Pokémon">Pokémon</button>
+    <span class="by">Design by <strong>Tobiasz250</strong></span>
+    <span class="moc">MOC-169689</span>
+    <div class="acts"><a class="btn main" href="https://rebrickable.com/mocs/MOC-169689/">Build it</a><a class="btn" href="https://www.youtube.com/shorts/t8GJI0aVfNM">▶ Watch</a></div>
+  </div>
+</li>
+<li class="card" data-s="blastoise pokémon dlquin moc-225292 225292 ">
+  <a class="shot" href="https://www.youtube.com/shorts/k0xoB153OlI" aria-label="Watch Blastoise"><img src="thumbs/blastoise.jpg" alt="Blastoise brick model" loading="lazy" width="360" height="640"><span class="play"></span></a>
+  <div class="info">
+    <h2>Blastoise</h2>
+    <button type="button" class="chip" data-f="Pokémon" title="Show all Pokémon">Pokémon</button>
+    <span class="by">Design by <strong>DLQuin</strong></span>
+    <span class="moc">MOC-225292</span>
+    <div class="acts"><a class="btn main" href="https://rebrickable.com/mocs/MOC-225292/">Build it</a><a class="btn" href="https://www.youtube.com/shorts/k0xoB153OlI">▶ Watch</a></div>
+  </div>
+</li>
+<li class="card" data-s="sonic sonic theocol37 moc-268715 268715 ">
+  <a class="shot" href="https://www.youtube.com/shorts/D2QnRmd1Vlo" aria-label="Watch Sonic"><img src="thumbs/sonic.jpg" alt="Sonic brick model" loading="lazy" width="360" height="640"><span class="play"></span></a>
+  <div class="info">
+    <h2>Sonic</h2>
+    <button type="button" class="chip" data-f="Sonic" title="Show all Sonic">Sonic</button>
+    <span class="by">Design by <strong>Theocol37</strong></span>
+    <span class="moc">MOC-268715</span>
+    <div class="acts"><a class="btn main" href="https://rebrickable.com/mocs/MOC-268715/">Build it</a><a class="btn" href="https://www.youtube.com/shorts/D2QnRmd1Vlo">▶ Watch</a></div>
+  </div>
+</li>
+<li class="card" data-s="kirby nintendo moyerpandabuilder moc-217625 217625 ">
+  <a class="shot" href="https://www.youtube.com/shorts/B_UwdCcusfs" aria-label="Watch Kirby"><img src="thumbs/kirby.jpg" alt="Kirby brick model" loading="lazy" width="360" height="640"><span class="play"></span></a>
+  <div class="info">
+    <h2>Kirby</h2>
+    <button type="button" class="chip" data-f="Nintendo" title="Show all Nintendo">Nintendo</button>
+    <span class="by">Design by <strong>moyerpandabuilder</strong></span>
+    <span class="moc">MOC-217625</span>
+    <div class="acts"><a class="btn main" href="https://rebrickable.com/mocs/MOC-217625/">Build it</a><a class="btn" href="https://www.youtube.com/shorts/B_UwdCcusfs">▶ Watch</a></div>
+  </div>
+</li>
+<li class="card" data-s="oddish pokémon agilinzzz moc-203830 203830 ">
+  <a class="shot" href="https://www.youtube.com/shorts/YaMqEzZZLS4" aria-label="Watch Oddish"><img src="thumbs/oddish.jpg" alt="Oddish brick model" loading="lazy" width="360" height="640"><span class="play"></span></a>
+  <div class="info">
+    <h2>Oddish</h2>
+    <button type="button" class="chip" data-f="Pokémon" title="Show all Pokémon">Pokémon</button>
+    <span class="by">Design by <strong>Agilinzzz</strong></span>
+    <span class="moc">MOC-203830</span>
+    <div class="acts"><a class="btn main" href="https://rebrickable.com/mocs/MOC-203830/">Build it</a><a class="btn" href="https://www.youtube.com/shorts/YaMqEzZZLS4">▶ Watch</a></div>
+  </div>
+</li>
+<li class="card" data-s="this is fine dog meme martin kolář moc-79614 79614 ">
+  <a class="shot" href="https://www.youtube.com/shorts/1WcWCi-KbrQ" aria-label="Watch This Is Fine Dog"><img src="thumbs/this-is-fine.jpg" alt="This Is Fine Dog brick model" loading="lazy" width="360" height="640"><span class="play"></span></a>
+  <div class="info">
+    <h2>This Is Fine Dog</h2>
+    <button type="button" class="chip" data-f="Meme" title="Show all Meme">Meme</button>
+    <span class="by">Design by <strong>Martin Kolář</strong></span>
+    <span class="moc">MOC-79614</span>
+    <div class="acts"><a class="btn main" href="https://rebrickable.com/mocs/MOC-79614/">Build it</a><a class="btn" href="https://www.youtube.com/shorts/1WcWCi-KbrQ">▶ Watch</a></div>
+  </div>
+</li>
+<li class="card" data-s="zapdos pokémon redhunt_718 moc-266918 266918 ">
+  <a class="shot" href="https://www.youtube.com/shorts/UPgZwzpL3SY" aria-label="Watch Zapdos"><img src="thumbs/zapdos.jpg" alt="Zapdos brick model" loading="lazy" width="360" height="640"><span class="play"></span></a>
+  <div class="info">
+    <h2>Zapdos</h2>
+    <button type="button" class="chip" data-f="Pokémon" title="Show all Pokémon">Pokémon</button>
+    <span class="by">Design by <strong>RedHunt_718</strong></span>
+    <span class="moc">MOC-266918</span>
+    <div class="acts"><a class="btn main" href="https://rebrickable.com/mocs/MOC-266918/">Build it</a><a class="btn" href="https://www.youtube.com/shorts/UPgZwzpL3SY">▶ Watch</a></div>
+  </div>
+</li>
+<li class="card" data-s="baby yoda star wars r0sch moc-32056 32056 ">
+  <a class="shot" href="https://www.youtube.com/shorts/txGRrtMZYIc" aria-label="Watch Baby Yoda"><img src="thumbs/grogu.jpg" alt="Baby Yoda brick model" loading="lazy" width="360" height="640"><span class="play"></span></a>
+  <div class="info">
+    <h2>Baby Yoda</h2>
+    <button type="button" class="chip" data-f="Star Wars" title="Show all Star Wars">Star Wars</button>
+    <span class="by">Design by <strong>R0Sch</strong></span>
+    <span class="moc">MOC-32056</span>
+    <div class="acts"><a class="btn main" href="https://rebrickable.com/mocs/MOC-32056/">Build it</a><a class="btn" href="https://www.youtube.com/shorts/txGRrtMZYIc">▶ Watch</a></div>
+  </div>
+</li>
+<li class="card" data-s="slowpoke pokémon agilinzzz moc-204063 204063 ">
+  <a class="shot" href="https://www.youtube.com/shorts/-zXWQpEThSo" aria-label="Watch Slowpoke"><img src="thumbs/slowpoke.jpg" alt="Slowpoke brick model" loading="lazy" width="360" height="640"><span class="play"></span></a>
+  <div class="info">
+    <h2>Slowpoke</h2>
+    <button type="button" class="chip" data-f="Pokémon" title="Show all Pokémon">Pokémon</button>
+    <span class="by">Design by <strong>Agilinzzz</strong></span>
+    <span class="moc">MOC-204063</span>
+    <div class="acts"><a class="btn main" href="https://rebrickable.com/mocs/MOC-204063/">Build it</a><a class="btn" href="https://www.youtube.com/shorts/-zXWQpEThSo">▶ Watch</a></div>
+  </div>
+</li>
+<li class="card" data-s="totoro ghibli rovel moc-277428 277428 ">
+  <a class="shot" href="https://www.youtube.com/shorts/0pNaJ-Q0g0o" aria-label="Watch Totoro"><img src="thumbs/totoro.jpg" alt="Totoro brick model" loading="lazy" width="360" height="640"><span class="play"></span></a>
+  <div class="info">
+    <h2>Totoro</h2>
+    <button type="button" class="chip" data-f="Ghibli" title="Show all Ghibli">Ghibli</button>
+    <span class="by">Design by <strong>Rovel</strong></span>
+    <span class="moc">MOC-277428</span>
+    <div class="acts"><a class="btn main" href="https://rebrickable.com/mocs/MOC-277428/">Build it</a><a class="btn" href="https://www.youtube.com/shorts/0pNaJ-Q0g0o">▶ Watch</a></div>
+  </div>
+</li>
+<li class="card" data-s="krabby pokémon boffs bricks moc-277591 277591 ">
+  <a class="shot" href="https://www.youtube.com/shorts/gVAH63sdaaI" aria-label="Watch Krabby"><img src="thumbs/krabby.jpg" alt="Krabby brick model" loading="lazy" width="360" height="640"><span class="play"></span></a>
+  <div class="info">
+    <h2>Krabby</h2>
+    <button type="button" class="chip" data-f="Pokémon" title="Show all Pokémon">Pokémon</button>
+    <span class="by">Design by <strong>Boffs Bricks</strong></span>
+    <span class="moc">MOC-277591</span>
+    <div class="acts"><a class="btn main" href="https://rebrickable.com/mocs/MOC-277591/">Build it</a><a class="btn" href="https://www.youtube.com/shorts/gVAH63sdaaI">▶ Watch</a></div>
+  </div>
+</li>
+<li class="card" data-s="appa avatar nickbrick moc-163186 163186 ">
+  <a class="shot" href="https://www.youtube.com/shorts/eE7yiYEH0No" aria-label="Watch Appa"><img src="thumbs/appa.jpg" alt="Appa brick model" loading="lazy" width="360" height="640"><span class="play"></span></a>
+  <div class="info">
+    <h2>Appa</h2>
+    <button type="button" class="chip" data-f="Avatar" title="Show all Avatar">Avatar</button>
+    <span class="by">Design by <strong>NickBrick</strong></span>
+    <span class="moc">MOC-163186</span>
+    <div class="acts"><a class="btn main" href="https://rebrickable.com/mocs/MOC-163186/">Build it</a><a class="btn" href="https://www.youtube.com/shorts/eE7yiYEH0No">▶ Watch</a></div>
+  </div>
+</li>
+<li class="card" data-s="kittykat cat trky.jrky moc-205181 205181 ">
+  <a class="shot" href="https://www.youtube.com/shorts/bMV-ySZ4jEU" aria-label="Watch Kittykat"><img src="thumbs/kittykat.jpg" alt="Kittykat brick model" loading="lazy" width="360" height="640"><span class="play"></span></a>
+  <div class="info">
+    <h2>Kittykat</h2>
+    <button type="button" class="chip" data-f="Cat" title="Show all Cat">Cat</button>
+    <span class="by">Design by <strong>trky.JRKy</strong></span>
+    <span class="moc">MOC-205181</span>
+    <div class="acts"><a class="btn main" href="https://rebrickable.com/mocs/MOC-205181/">Build it</a><a class="btn" href="https://www.youtube.com/shorts/bMV-ySZ4jEU">▶ Watch</a></div>
+  </div>
+</li>
+<li class="card" data-s="chicken jockey minecraft grosnoob51 moc-218030 218030 ">
+  <a class="shot" href="https://www.youtube.com/shorts/kr_kMod6pgU" aria-label="Watch Chicken Jockey"><img src="thumbs/chicken-jockey.jpg" alt="Chicken Jockey brick model" loading="lazy" width="360" height="640"><span class="play"></span></a>
+  <div class="info">
+    <h2>Chicken Jockey</h2>
+    <button type="button" class="chip" data-f="Minecraft" title="Show all Minecraft">Minecraft</button>
+    <span class="by">Design by <strong>grosnoob51</strong></span>
+    <span class="moc">MOC-218030</span>
+    <div class="acts"><a class="btn main" href="https://rebrickable.com/mocs/MOC-218030/">Build it</a><a class="btn" href="https://www.youtube.com/shorts/kr_kMod6pgU">▶ Watch</a></div>
+  </div>
+</li>
+<li class="card" data-s="fear the silly goose 🎃 halloween camobricktape moc-237025 237025 &quot;commander cody goose short neck&quot;">
+  <a class="shot" href="https://www.youtube.com/shorts/ZtcU7TWzcDQ" aria-label="Watch Fear the Silly Goose 🎃"><img src="thumbs/goose-halloween.jpg" alt="Fear the Silly Goose 🎃 brick model" loading="lazy" width="360" height="640"><span class="play"></span></a>
+  <div class="info">
+    <h2>Fear the Silly Goose 🎃</h2>
+    <button type="button" class="chip" data-f="Halloween" title="Show all Halloween">Halloween</button>
+    <span class="by">Design by <strong>Camobricktape</strong></span>
+    <span class="moc">MOC-237025</span>
+    <div class="acts"><a class="btn main" href="https://rebrickable.com/mocs/MOC-237025/">Build it</a><a class="btn" href="https://www.youtube.com/shorts/ZtcU7TWzcDQ">▶ Watch</a></div>
+  </div>
+</li>
+<li class="card" data-s="daft punk helmet  djehrame moc-206112 206112 ">
+  <a class="shot" href="https://www.youtube.com/shorts/PjT_GT2hfq8" aria-label="Watch Daft Punk Helmet"><img src="thumbs/daft-punk.jpg" alt="Daft Punk Helmet brick model" loading="lazy" width="360" height="640"><span class="play"></span></a>
+  <div class="info">
+    <h2>Daft Punk Helmet</h2>
+    <span class="by">Design by <strong>djehrame</strong></span>
+    <span class="moc">MOC-206112</span>
+    <div class="acts"><a class="btn main" href="https://rebrickable.com/mocs/MOC-206112/">Build it</a><a class="btn" href="https://www.youtube.com/shorts/PjT_GT2hfq8">▶ Watch</a></div>
+  </div>
+</li>
+<li class="card" data-s="groudon pokémon ablazefire moc-22718 22718 ">
+  <a class="shot" href="https://www.youtube.com/shorts/fdTCkpf59TQ" aria-label="Watch Groudon"><img src="thumbs/groudon.jpg" alt="Groudon brick model" loading="lazy" width="360" height="640"><span class="play"></span></a>
+  <div class="info">
+    <h2>Groudon</h2>
+    <button type="button" class="chip" data-f="Pokémon" title="Show all Pokémon">Pokémon</button>
+    <span class="by">Design by <strong>ablazefire</strong></span>
+    <span class="moc">MOC-22718</span>
+    <div class="acts"><a class="btn main" href="https://rebrickable.com/mocs/MOC-22718/">Build it</a><a class="btn" href="https://www.youtube.com/shorts/fdTCkpf59TQ">▶ Watch</a></div>
+  </div>
+</li>
+<li class="card" data-s="capybara animal antorman moc-251354 251354 ">
+  <a class="shot" href="https://www.youtube.com/shorts/gdfEals551E" aria-label="Watch Capybara"><img src="thumbs/capybara.jpg" alt="Capybara brick model" loading="lazy" width="360" height="640"><span class="play"></span></a>
+  <div class="info">
+    <h2>Capybara</h2>
+    <button type="button" class="chip" data-f="Animal" title="Show all Animal">Animal</button>
+    <span class="by">Design by <strong>AntOrman</strong></span>
+    <span class="moc">MOC-251354</span>
+    <div class="acts"><a class="btn main" href="https://rebrickable.com/mocs/MOC-251354/">Build it</a><a class="btn" href="https://www.youtube.com/shorts/gdfEals551E">▶ Watch</a></div>
+  </div>
+</li>
+<li class="card" data-s="red &amp; pikachu pokémon boffs bricks moc-278877 278877 ">
+  <a class="shot" href="https://www.youtube.com/shorts/uArgCdFShUs" aria-label="Watch Red &amp; Pikachu"><img src="thumbs/trainer-pikachu.jpg" alt="Red &amp; Pikachu brick model" loading="lazy" width="360" height="640"><span class="play"></span></a>
+  <div class="info">
+    <h2>Red &amp; Pikachu</h2>
+    <button type="button" class="chip" data-f="Pokémon" title="Show all Pokémon">Pokémon</button>
+    <span class="by">Design by <strong>Boffs Bricks</strong></span>
+    <span class="moc">MOC-278877</span>
+    <div class="acts"><a class="btn main" href="https://rebrickable.com/mocs/MOC-278877/">Build it</a><a class="btn" href="https://www.youtube.com/shorts/uArgCdFShUs">▶ Watch</a></div>
+  </div>
+</li>
+<li class="card" data-s="makuta bionicle wxzhrs moc-101019 101019 ">
+  <a class="shot" href="https://www.youtube.com/shorts/gr8NwQC2JQs" aria-label="Watch Makuta"><img src="thumbs/makuta.jpg" alt="Makuta brick model" loading="lazy" width="360" height="640"><span class="play"></span></a>
+  <div class="info">
+    <h2>Makuta</h2>
+    <button type="button" class="chip" data-f="BIONICLE" title="Show all BIONICLE">BIONICLE</button>
+    <span class="by">Design by <strong>wxzhrs</strong></span>
+    <span class="moc">MOC-101019</span>
+    <div class="acts"><a class="btn main" href="https://rebrickable.com/mocs/MOC-101019/">Build it</a><a class="btn" href="https://www.youtube.com/shorts/gr8NwQC2JQs">▶ Watch</a></div>
+  </div>
+</li>
+<li class="card" data-s="dratini pokémon trky.jrky moc-181540 181540 ">
+  <a class="shot" href="https://www.youtube.com/shorts/65DatKtkRKo" aria-label="Watch Dratini"><img src="thumbs/dratini.jpg" alt="Dratini brick model" loading="lazy" width="360" height="640"><span class="play"></span></a>
+  <div class="info">
+    <h2>Dratini</h2>
+    <button type="button" class="chip" data-f="Pokémon" title="Show all Pokémon">Pokémon</button>
+    <span class="by">Design by <strong>trky.JRKy</strong></span>
+    <span class="moc">MOC-181540</span>
+    <div class="acts"><a class="btn main" href="https://rebrickable.com/mocs/MOC-181540/">Build it</a><a class="btn" href="https://www.youtube.com/shorts/65DatKtkRKo">▶ Watch</a></div>
+  </div>
+</li>
+<li class="card" data-s="magikarp pokémon agilinzzz moc-205690 205690 ">
+  <a class="shot" href="https://www.youtube.com/shorts/AGwh91my0E8" aria-label="Watch Magikarp"><img src="thumbs/magikarp.jpg" alt="Magikarp brick model" loading="lazy" width="360" height="640"><span class="play"></span></a>
+  <div class="info">
+    <h2>Magikarp</h2>
+    <button type="button" class="chip" data-f="Pokémon" title="Show all Pokémon">Pokémon</button>
+    <span class="by">Design by <strong>Agilinzzz</strong></span>
+    <span class="moc">MOC-205690</span>
+    <div class="acts"><a class="btn main" href="https://rebrickable.com/mocs/MOC-205690/">Build it</a><a class="btn" href="https://www.youtube.com/shorts/AGwh91my0E8">▶ Watch</a></div>
+  </div>
+</li>
+<li class="card" data-s="sauron (lord of the rings)  brick-kitty builds moc-139619 139619 ">
+  <a class="shot" href="https://www.youtube.com/shorts/XxJPUA7rch8" aria-label="Watch Sauron (Lord of the Rings)"><img src="thumbs/sauron.jpg" alt="Sauron (Lord of the Rings) brick model" loading="lazy" width="360" height="640"><span class="play"></span></a>
+  <div class="info">
+    <h2>Sauron (Lord of the Rings)</h2>
+    <span class="by">Design by <strong>Brick-Kitty Builds</strong></span>
+    <span class="moc">MOC-139619</span>
+    <div class="acts"><a class="btn main" href="https://rebrickable.com/mocs/MOC-139619/">Build it</a><a class="btn" href="https://www.youtube.com/shorts/XxJPUA7rch8">▶ Watch</a></div>
+  </div>
+</li>
+<li class="card" data-s="mira kpop demon hunters earthwalker moc-241141 241141 ">
+  <a class="shot" href="https://www.youtube.com/shorts/g6se_-VvFOQ" aria-label="Watch Mira"><img src="thumbs/mira.jpg" alt="Mira brick model" loading="lazy" width="360" height="640"><span class="play"></span></a>
+  <div class="info">
+    <h2>Mira</h2>
+    <button type="button" class="chip" data-f="KPop Demon Hunters" title="Show all KPop Demon Hunters">KPop Demon Hunters</button>
+    <span class="by">Design by <strong>Earthwalker</strong></span>
+    <span class="moc">MOC-241141</span>
+    <div class="acts"><a class="btn main" href="https://rebrickable.com/mocs/MOC-241141/">Build it</a><a class="btn" href="https://www.youtube.com/shorts/g6se_-VvFOQ">▶ Watch</a></div>
+  </div>
+</li>
+<li class="card" data-s="anger inside out orchardbuilds moc-182612 182612 ">
+  <a class="shot" href="https://www.youtube.com/shorts/AROrcvG2_lE" aria-label="Watch Anger"><img src="thumbs/anger.jpg" alt="Anger brick model" loading="lazy" width="360" height="640"><span class="play"></span></a>
+  <div class="info">
+    <h2>Anger</h2>
+    <button type="button" class="chip" data-f="Inside Out" title="Show all Inside Out">Inside Out</button>
+    <span class="by">Design by <strong>OrchardBuilds</strong></span>
+    <span class="moc">MOC-182612</span>
+    <div class="acts"><a class="btn main" href="https://rebrickable.com/mocs/MOC-182612/">Build it</a><a class="btn" href="https://www.youtube.com/shorts/AROrcvG2_lE">▶ Watch</a></div>
+  </div>
+</li>
+<li class="card" data-s="psyduck  agilinzzz moc-203002 203002 ">
+  <a class="shot" href="https://www.youtube.com/shorts/wYKuJD0up2E" aria-label="Watch Psyduck"><img src="thumbs/psyduck.jpg" alt="Psyduck brick model" loading="lazy" width="360" height="640"><span class="play"></span></a>
+  <div class="info">
+    <h2>Psyduck</h2>
+    <span class="by">Design by <strong>Agilinzzz</strong></span>
+    <span class="moc">MOC-203002</span>
+    <div class="acts"><a class="btn main" href="https://rebrickable.com/mocs/MOC-203002/">Build it</a><a class="btn" href="https://www.youtube.com/shorts/wYKuJD0up2E">▶ Watch</a></div>
+  </div>
+</li>
+<li class="card" data-s="ekans  agilinzzz moc-203831 203831 ">
+  <a class="shot" href="https://www.youtube.com/shorts/RuDIOMfWst8" aria-label="Watch Ekans"><span class="ph" aria-hidden="true">E</span><span class="play"></span></a>
+  <div class="info">
+    <h2>Ekans</h2>
+    <span class="by">Design by <strong>Agilinzzz</strong></span>
+    <span class="moc">MOC-203831</span>
+    <div class="acts"><a class="btn main" href="https://rebrickable.com/mocs/MOC-203831/">Build it</a><a class="btn" href="https://www.youtube.com/shorts/RuDIOMfWst8">▶ Watch</a></div>
+  </div>
+</li>
+    </ul>
+    <p class="empty" id="empty" hidden>No model matches that search.</p>
+  </div>
+
+  <p class="muted">Newest first. Once Upon a Brick is an independent channel and is not affiliated with, sponsored or
+  endorsed by any toy brick manufacturer or by the owners of the characters shown.</p>
+
+  <nav><a href="index.html">Home</a><a href="models.html">Models</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a>
+  <a href="mailto:ouabrick@gmail.com">ouabrick@gmail.com</a></nav>
+</main>
+<script>
+(function(){
+  var q=document.getElementById('q'),cards=[].slice.call(document.querySelectorAll('.card')),
+      n=document.getElementById('n'),empty=document.getElementById('empty'),box=document.getElementById('models');
+  function filter(){
+    var t=q.value.trim().toLowerCase().split(/\s+/).filter(Boolean),k=0;
+    cards.forEach(function(c){var hit=t.every(function(w){return c.dataset.s.indexOf(w)>=0});c.hidden=!hit;if(hit)k++});
+    n.textContent=k+(k===1?' model':' models');empty.hidden=k>0;
+  }
+  function mode(m){
+    box.classList.toggle('list',m==='list');
+    document.querySelectorAll('.toggle button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.m===m)});
+    try{localStorage.setItem('ouab-models-view',m)}catch(e){}
+  }
+  q.addEventListener('input',filter);
+  document.querySelectorAll('.chip').forEach(function(c){c.addEventListener('click',function(){q.value=c.dataset.f;filter();q.focus();window.scrollTo({top:q.getBoundingClientRect().top+window.scrollY-20,behavior:'smooth'})})});
+  document.querySelectorAll('.toggle button').forEach(function(b){b.addEventListener('click',function(){mode(b.dataset.m)})});
+  var saved='gallery';try{saved=localStorage.getItem('ouab-models-view')||'gallery'}catch(e){}
+  mode(saved);filter();
+})();
+</script>
+</body>
+</html>
